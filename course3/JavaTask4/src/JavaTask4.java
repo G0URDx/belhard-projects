@@ -13,11 +13,9 @@ public class JavaTask4 {
             }
         }
         // step1 method
-        System.out.println("Your vector is:");
-        System.out.println(Arrays.toString(arrayVector));
+        System.out.println("Your vector is:" + "\n" + Arrays.toString(arrayVector));
         step1(arrayVector);
-        System.out.println("\nYour sorted vector is:");
-        System.out.println(Arrays.toString(arrayVector));
+        System.out.println("\nYour sorted vector is:" + "\n" + Arrays.toString(arrayVector));
         // step2 method
         System.out.println("\nYour matrix is:");
         printMatrixInt(arrayMatrix);
@@ -35,23 +33,19 @@ public class JavaTask4 {
                 mulMatrix2[i][j] = random.nextInt();
             }
         }
-        double[] result1 = mul(mulMatrix1, mulVector); // Matrix * vector
-        System.out.println("\nMatrix * vector:");
-        System.out.println(Arrays.toString(result1));
-        double[][] result2 = mul(mulMatrix1, mulMatrix2); // Matrix * matrix
+
+        System.out.println("\nMatrix * vector:" + "\n" + Arrays.toString(mul(mulMatrix1, mulVector))); // Matrix *
+                                                                                                       // vector
         System.out.println("\nMatrix * matrix:");
-        printMatrixDouble(result2);
+        printMatrixDouble(mul(mulMatrix1, mulMatrix2)); // Matrix * matrix
 
         String text = "Laoreet vestibulum aliquet lobortis dictum leo feugiat Justo suspendisse natoque mollis";
-        System.out.println("\nYour text is:");
-        System.out.println(text);
-        String changedText = replace(text); // Text change
-        System.out.println("\nYour changed text is:");
-        System.out.println(changedText);
+        System.out.println("\nYour text is:" + "\n" + text);
+        System.out.println("\nYour changed text is:" + "\n" + replace(text));
 
         String isPalindromWord = "kolok";
-        System.out.println("\nYour word: " + isPalindromWord + " is palindrom: " + isPalindrom("kolok")); // Define
-                                                                                                          // palindrom
+        System.out.println("\nYour word " + isPalindromWord + " is palindrom: " + isPalindrom("kolok")); // Define
+                                                                                                         // palindrom
     }
 
     static void printMatrixInt(int[][] array) {
@@ -92,18 +86,29 @@ public class JavaTask4 {
 
     // Insertion sort
     static int[][] step2(int[][] array) {
-        for (int i = 0; i < array.length; i++) { // Rows
-            for (int left = 0; left < array[i].length; left++) { // Sort elements in row
-                int temp = array[i][left]; // Value of element
-                int j = left - 1; // Finding indexes before sorting element
-                for (; j >= 0; j--) {
-                    if (temp < array[i][j]) { // If find lower value, move bigger value further
-                        array[i][j + 1] = array[i][j];
-                    } else {
-                        break; // If find bigger element, stop
-                    }
+        int[] tempArray = new int[25];
+        int k = 0;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                tempArray[k++] = array[i][j]; // Conver matrix to vector
+            }
+        }
+        for (int left = 0; left < tempArray.length; left++) { // Sort elements in row
+            int tempValue = tempArray[left]; // Value of element
+            int i = left - 1; // Finding indexes before sorting element
+            for (; i >= 0; i--) {
+                if (tempValue < tempArray[i]) { // If find lower value, move bigger value further
+                    tempArray[i + 1] = tempArray[i];
+                } else {
+                    break; // If find bigger element, stop
                 }
-                array[i][j + 1] = temp; // Insert found value
+            }
+            tempArray[i + 1] = tempValue; // Insert found value
+        }
+        k = 0;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = tempArray[k++]; // Conver vector to matrix
             }
         }
         return array;
