@@ -26,6 +26,7 @@ public class JavaTask1 {
             System.out.println("\nJavaTask1 complete! Press <Enter> to continue");
             System.console().readLine();
         }
+        scannerTask1.close();
     }
 
     static void step1(int[] array) {

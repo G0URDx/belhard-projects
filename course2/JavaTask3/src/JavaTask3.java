@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,6 +17,15 @@ public class JavaTask3 {
             System.out.print("\n");
         }
         System.out.println("Total sum = " + step2(array)); // Step 2 Method
+        step3(array);
+        System.out.println("\nYour changed array is:");
+        for (int i = 0; i < n; i++) { // Array output
+            for (int j = 0; j < n; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
+        scannerTask3.close();
     }
 
     static int[][] step1(int n) {
@@ -69,16 +79,32 @@ public class JavaTask3 {
     }
 
     static int[][] step3(int[][] array) {
-        int max = 0;
-        int indexMax = 0;
+        int max = 0; // Init max variable
+        ArrayList<Integer> rowsToDelete = new ArrayList<>(); // Init dynamic array
+        ArrayList<Integer> columsToDelete = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-                if (array[i][j] > max) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] > max) { // Search for max element indexes
                     max = array[i][j];
-                    indexMax = j;
+                    rowsToDelete.clear();
+                    columsToDelete.clear();
+                    rowsToDelete.add(i);
+                    columsToDelete.add(j);
+                } else if (array[i][j] == max) {
+                    rowsToDelete.add(i);
+                    columsToDelete.add(j);
                 }
             }
-
+        }
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (rowsToDelete.contains(i)) { // Change to 0
+                    array[i][j] = 0;
+                }
+                if (columsToDelete.contains(j)) {
+                    array[i][j] = 0;
+                }
+            }
         }
         return array;
     }

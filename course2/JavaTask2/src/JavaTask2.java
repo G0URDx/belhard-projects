@@ -20,6 +20,7 @@ public class JavaTask2 {
         step3(a, b, c); // Step 3 Method
         System.out.println("\nJavaTask2 complete! Press <Enter> to continue");
         System.console().readLine();
+        scannerTask2.close();
     }
 
     static void step1() {
