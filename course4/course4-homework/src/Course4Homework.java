@@ -1,4 +1,6 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,11 +24,17 @@ public class Course4Homework {
 
         // Task 3 pattern
         text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed orci quam, vehicula ut velit in, accumsan blandit lorem. Vivamus interdum faucibus ipsum. Sed dictum ornare semper. Proin et tincidunt neque. Nullam elit leo, facilisis sit amet quam quis, scelerisque tristique ex. Phasellus suscipit in mauris sed sodales. Integer condimentum eget nulla at maximus.";
-        // text.replaceAll("[^A-Za-z]+", " ");
+        String fixedText = "";
         pattern = Pattern.compile("[A-Za-z]+[.]?");
         matcher = pattern.matcher(text);
         while (matcher.find()) {
-            System.out.print(text.substring(matcher.start(), matcher.end()));
+            fixedText = fixedText.concat(text.substring(matcher.start(), matcher.end()));
+        }
+        // System.out.println(fixedText);
+        String[] sentences = fixedText.split("[.!?]\\s*");
+        Arrays.sort(sentences, Comparator.comparingInt(String::length));
+        for (String sentence : sentences) {
+            System.out.println(sentence);
         }
     }
 }
