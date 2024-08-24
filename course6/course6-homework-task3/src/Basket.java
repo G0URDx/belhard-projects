@@ -13,10 +13,13 @@ public class Basket {
         this.product = product;
     }
 
-    public void printBasket() {
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < product.length; i++) {
-            product[i].printProduct();
+            stringBuilder.append("\n").append(product[i].toString());
         }
+        return stringBuilder.toString();
     }
 
 }

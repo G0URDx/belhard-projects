@@ -33,9 +33,9 @@ public class User {
         this.basket = basket;
     }
 
-    public void printPurchases() {
-        System.out.println("\n" + getUsername() + " purchases:");
-        basket.printBasket();
+    @Override
+    public String toString() {
+        return "\n" + getUsername() + ":" + basket.toString();
     }
 
 }

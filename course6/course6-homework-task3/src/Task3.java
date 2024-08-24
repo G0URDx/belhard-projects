@@ -22,12 +22,12 @@ public class Task3 {
         Category vagetablesCategory = new Category("Vegetables", vegetablesArray);
         Category snacksCategory = new Category("Snacks", snacksArray);
         Category drinksCategory = new Category("Drinks", drinksArray);
-        // Category[] categories = { vagetablesCategory, snacksCategory, drinksCategory
-        // };
 
         // Print Catalog
-        // vagetablesCategory.printCatalog(vagetablesCategory, snacksCategory,
-        // drinksCategory);
+        System.out.println("Catalog:");
+        System.out.println(vagetablesCategory);
+        System.out.println(snacksCategory);
+        System.out.println(drinksCategory);
 
         // Users
         Product[] user1Purchases = { product1, product2, product8 };
@@ -38,7 +38,8 @@ public class Task3 {
         User user2 = new User("user2", "654321", user2Basket);
 
         // Print users purchases
-        user1.printPurchases();
-        user2.printPurchases();
+        System.out.println("Users:");
+        System.out.println(user1);
+        System.out.println(user2);
     }
 }

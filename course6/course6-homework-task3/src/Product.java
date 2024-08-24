@@ -33,8 +33,9 @@ public class Product {
         this.rating = rating;
     }
 
-    public void printProduct() {
-        System.out.println(getName() + " " + getPrice() + "$ " + getRating() + "*");
+    @Override
+    public String toString() {
+        return name + " " + price + "$ " + rating + "*";
     }
 
 }

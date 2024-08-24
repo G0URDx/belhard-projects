@@ -23,21 +23,12 @@ public class Category {
         this.product = product;
     }
 
-    public void printCatalog(Category... categories) {
-        System.out.println("\nProducts catalog:");
-        for (Category category : categories) {
-            System.out.println("\nCategory: " + category.getName());
-            for (int i = 0; i < categories.length; i++) {
-                category.product[i].printProduct();
-            }
-        }
-    }
-
-    public void printCatalog(Category category) {
-        System.out.println("\nProducts catalog:");
-        System.out.println("\nCategory: " + category.getName());
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < product.length; i++) {
-            category.product[i].printProduct();
+            stringBuilder.append(product[i].toString()).append("\n");
         }
+        return stringBuilder.toString();
     }
 }
