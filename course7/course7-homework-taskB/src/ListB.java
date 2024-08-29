@@ -1,30 +1,61 @@
 import java.util.Arrays;
 
-public class ListA<T> implements List<T> {
+public class ListB<T> implements List<T> {
     private static final Integer capacity = 16;
     private Object[] elements;
     private int size;
 
     // #region Constructors
-    // Create array without size parameters
-    public ListA() {
-        elements = new Object[capacity];
-        // size = 0;
+    public ListB() {
+        this.elements = new Object[capacity];
     }
 
-    // Create array with size parameters
-    public ListA(int capacity) {
-        elements = new Object[capacity];
-        // size = 0;
+    public ListB(int capacity) {
+        this.elements = new Object[capacity];
     }
     // #endregion
 
     // #region Interface methods
-    // Add elements in array
+    // Add element in array
     @Override
     public void add(T element) {
         checkArraySize();
         elements[size++] = element;
+    }
+
+    // Add element in array by Index
+    @Override
+    public void add(int index, T element) {
+        if (size - 1 < index) {
+            for (int i = size; i <= index; i++) {
+                checkArraySize();
+                if (i == index) {
+                    elements[size++] = element;
+                    break;
+                }
+                elements[size++] = null;
+            }
+        } else if (size - 1 >= index && index >= 0) {
+            int elementsMoved = size - index;
+            if (elementsMoved > 0) {
+                checkArraySize();
+                size++;
+                System.arraycopy(elements, index, elements, index + 1, elementsMoved);
+                elements[index] = element;
+            }
+        }
+    }
+
+    @Override
+    public void addAll(List<?> c) {
+        int elementsAdded = c.printSize();
+        Object[] newElements = new Object[elementsAdded];
+        for (int i = 0; i < elementsAdded; i++) {
+            newElements[i] = c.get(i);
+        }
+        checkArraySize(size + elementsAdded);
+        System.arraycopy(newElements, 0, elements, size, elementsAdded);
+        size += elementsAdded;
     }
 
     // Remove by Index
@@ -59,18 +90,16 @@ public class ListA<T> implements List<T> {
         }
     }
 
-    // Get element by Value
+    // Set element by Index
     @Override
     @SuppressWarnings("unchecked")
-    public T get(T value) {
-        if (size > 0) {
-            for (Object element : elements) {
-                if (element.equals(value)) {
-                    return (T) element;
-                }
-            }
+    public T set(int index, T element) {
+        try {
+            elements[index] = element;
+            return (T) elements[index];
+        } catch (Exception exception) {
+            return null;
         }
-        return null;
     }
     // #endregion
 
@@ -96,9 +125,19 @@ public class ListA<T> implements List<T> {
         }
     }
 
+    // Check array size for new elements (new elements > 1)
+    private void checkArraySize(int minSize) {
+        // If size equals array size - duplicate this array with double size
+        if (minSize > elements.length) {
+            elements = Arrays.copyOf(elements, elements.length * 2);
+        }
+    }
+
     // Prints size of list
+    @Override
     public int printSize() {
         return this.size;
     }
     // #endregion
+
 }
