@@ -19,6 +19,7 @@ public class SetC<T> implements Set<T> {
     }
     // #endregion
 
+    // #region TaskC
     @Override
     public String toString() {
         if (size == 0) {
@@ -115,6 +116,7 @@ public class SetC<T> implements Set<T> {
             elements = Arrays.copyOf(elements, elements.length * 2);
         }
     }
+    // #endregion
 
     // #region Auto-generated methods
     @Override

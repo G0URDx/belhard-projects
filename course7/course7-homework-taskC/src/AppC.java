@@ -20,7 +20,6 @@ public class AppC {
         System.out.println("Set size = " + set.size());
 
         // Set is empty
-        // set.clear();
         System.out.println("Set is empty? = " + set.isEmpty());
 
         // Add new set
