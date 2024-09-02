@@ -1,4 +1,8 @@
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class ListB<T> implements List<T> {
     private static final Integer capacity = 16;
@@ -15,12 +19,65 @@ public class ListB<T> implements List<T> {
     }
     // #endregion
 
-    // #region Interface methods
+    // #region TaskB
+    // Print all elements in array
+    @Override
+    public String toString() {
+        if (size == 0) {
+            return "Array is empty";
+        }
+        StringBuilder stringBuilder = new StringBuilder("\n");
+        for (int i = 0; i < size; i++) {
+            stringBuilder.append(elements[i] + "\n");
+        }
+        return stringBuilder.toString();
+    }
+
     // Add element in array
     @Override
-    public void add(T element) {
+    public boolean add(T e) {
         checkArraySize();
-        elements[size++] = element;
+        elements[size++] = e; // Add new element
+        return true;
+    }
+
+    // Remove by Index
+    @SuppressWarnings("unchecked")
+    @Override
+    public T remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        Object removedElement = elements[index];
+        int elementsMoved = size - index - 1;
+        if (elementsMoved > 0) {
+            System.arraycopy(elements, index + 1, elements, index, elementsMoved);
+        }
+        elements[--size] = null; // Remove last unused element
+        return (T) removedElement;
+    }
+
+    // Get element by Index
+    @SuppressWarnings("unchecked")
+    @Override
+    public T get(int index) {
+        try {
+            return (T) elements[index];
+        } catch (Exception exception) {
+            return null;
+        }
+    }
+
+    // Set element by Index
+    @SuppressWarnings("unchecked")
+    @Override
+    public T set(int index, T element) {
+        try {
+            elements[index] = element;
+            return (T) elements[index];
+        } catch (Exception exception) {
+            return null;
+        }
     }
 
     // Add element in array by Index
@@ -47,74 +104,23 @@ public class ListB<T> implements List<T> {
     }
 
     @Override
-    public void addAll(List<?> c) {
-        int elementsAdded = c.printSize();
-        Object[] newElements = new Object[elementsAdded];
-        for (int i = 0; i < elementsAdded; i++) {
-            newElements[i] = c.get(i);
+    public boolean addAll(Collection<? extends T> c) {
+        if (c == null) {
+            throw new NullPointerException("The provided collection is null");
         }
+        Object[] newElements = c.toArray();
+        if (newElements == null) {
+            throw new IllegalStateException("toArray() returned null");
+        }
+        int elementsAdded = newElements.length;
         checkArraySize(size + elementsAdded);
         System.arraycopy(newElements, 0, elements, size, elementsAdded);
         size += elementsAdded;
-    }
-
-    // Remove by Index
-    @Override
-    public void remove(int index) {
-        try {
-            int elementsMoved = size - index - 1;
-            if (elementsMoved > 0) {
-                /*
-                 * Parameter 1: Copy elements from "elements" (src)
-                 * Parameter 2: First element of copied array "Deleted element + 1" (srcPos)
-                 * Parameter 3: Copy elements to "elements" (dest)
-                 * Parameter 4: Position of copies array "Deleted element" (destPos)
-                 * Parameter 5: Quantity of copied elements "elementsMoved" (length)
-                 */
-                System.arraycopy(elements, index + 1, elements, index, elementsMoved);
-                elements[--size] = null; // Remove last unused element
-            }
-        } catch (IndexOutOfBoundsException exception) {
-            System.out.println("Index out of bounds");
+        if (elementsAdded > 0) {
+            return true;
+        } else {
+            return false;
         }
-    }
-
-    // Get element by Index
-    @Override
-    @SuppressWarnings("unchecked")
-    public T get(int index) {
-        try {
-            return (T) elements[index];
-        } catch (Exception exception) {
-            return null;
-        }
-    }
-
-    // Set element by Index
-    @Override
-    @SuppressWarnings("unchecked")
-    public T set(int index, T element) {
-        try {
-            elements[index] = element;
-            return (T) elements[index];
-        } catch (Exception exception) {
-            return null;
-        }
-    }
-    // #endregion
-
-    // #region Other methods
-    // Print all elements in array
-    @Override
-    public String toString() {
-        if (size == 0) {
-            return "Array is empty";
-        }
-        StringBuilder stringBuilder = new StringBuilder("\n");
-        for (int i = 0; i < size; i++) {
-            stringBuilder.append(elements[i] + "\n");
-        }
-        return stringBuilder.toString();
     }
 
     // Check array size for new elements
@@ -132,12 +138,109 @@ public class ListB<T> implements List<T> {
             elements = Arrays.copyOf(elements, elements.length * 2);
         }
     }
-
-    // Prints size of list
-    @Override
-    public int printSize() {
-        return this.size;
-    }
     // #endregion
 
+    // #region Auto-generated methods
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void clear() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        Object[] result = new Object[size];
+        System.arraycopy(elements, 0, result, 0, size);
+        return result;
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    // #endregion
 }

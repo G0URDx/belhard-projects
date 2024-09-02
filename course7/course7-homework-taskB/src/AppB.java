@@ -1,4 +1,4 @@
-public class App {
+public class AppB {
     public static void main(String[] args) throws Exception {
         ListB<String> list = new ListB<>();
 
@@ -6,7 +6,7 @@ public class App {
         for (int i = 0; i < 64; i++) {
             list.add("Element - " + i);
         }
-        System.out.println("List size is {" + list.printSize() + "}");
+        System.out.println("List size is {" + list.size() + "}");
 
         // Search by index (MIN = 0 & MAX = 63)
         System.out.println("\nSearch by index:");
@@ -14,7 +14,7 @@ public class App {
 
         // Add by Index
         list.add(127, "Element - 127");
-        System.out.println("\nList size is {" + list.printSize() + "}");
+        System.out.println("\nList size is {" + list.size() + "}");
 
         // Remove by index
         list.remove(5);
