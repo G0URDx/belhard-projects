@@ -1,4 +1,4 @@
-public class App {
+public class Course11App3 {
     public static void main(String[] args) throws Exception {
         SharedBuffer sharedBuffer = new SharedBuffer(8);
 

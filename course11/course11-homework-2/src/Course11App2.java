@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class App {
+public class Course11App2 {
     public static void main(String[] args) throws Exception {
         File folder = new File("D:/Workspaces/vscode/belhard-projects/course11/course11-homework-2/src/files");
         for (File file : folder.listFiles()) {
